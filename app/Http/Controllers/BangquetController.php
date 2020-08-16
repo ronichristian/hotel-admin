@@ -53,10 +53,7 @@ class BangquetController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request['date_of_event'];
-        // return Carbon::now();
-        // return date('Y-m-d H:i:s', strtotime($request['date_of_event']));
-        $date_of_event = date('Y-m-d H:i:s', strtotime($request['date_of_event']));
+        $date_of_event = date('Y-m-d H:i:s', strtotime($request['start_time']));
 
         $bangquet_reservation = $request->isMethod('put') ? BangquetReservation::findOrFail($request->id) : new BangquetReservation;
 
@@ -71,10 +68,11 @@ class BangquetController extends Controller
         $bangquet_reservation->phone_number = $request['phone_number'];
         $bangquet_reservation->email_address = $request['email_address'];
         $bangquet_reservation->date_of_event = $date_of_event;
-        $bangquet_reservation->start_time = $request['start_time'];
+        $bangquet_reservation->start_time = $date_of_event;
         $bangquet_reservation->end_time = $request['end_time'];
         $bangquet_reservation->no_of_pax = $request['no_of_pax'];
         $bangquet_reservation->motif = $request['motif'];
+        $bangquet_reservation->payment_mode = "unpaid";
         $bangquet_reservation->save();
 
         // $bangquet_id = DB::table('bangquet_reservations')->orderBy('id',"DESC")->take(1)->value('id');
@@ -133,7 +131,8 @@ class BangquetController extends Controller
                 'bangquet_reservations.no_of_pax',
                 'bangquet_reservations.motif',
                 'services.service_name',
-                'bangquet_reservations.paid_status')
+                'bangquet_reservations.paid_status',
+                'bangquet_reservations.payment_mode')
         ->orderBy('id', 'desc')
         ->get();
 
@@ -158,7 +157,8 @@ class BangquetController extends Controller
                 'bangquet_reservations.end_time',
                 'bangquet_reservations.no_of_pax',
                 'bangquet_reservations.motif',
-                'bangquet_reservations.paid_status')
+                'bangquet_reservations.paid_status',
+                'bangquet_reservations.payment_mode')
         ->where('id', '=', $id)
         ->orderBy('id', 'desc')
         ->get();
@@ -168,6 +168,7 @@ class BangquetController extends Controller
 
     public function bangquetReservationUpdate(Request $request)
     {
+        $date_of_event = date('Y-m-d H:i:s', strtotime($request['date_of_event']));
         $bangquet_reservation =  BangquetReservation::findOrFail($request['id']) ;
         
         $bangquet_reservation->event_name = $request['event_name'];
@@ -179,7 +180,7 @@ class BangquetController extends Controller
         $bangquet_reservation->status = 'occupied';
         $bangquet_reservation->phone_number = $request['phone_number'];
         $bangquet_reservation->email_address = $request['email_address'];
-        $bangquet_reservation->date_of_event = $request['date_of_event'];
+        $bangquet_reservation->date_of_event = $date_of_event;
         $bangquet_reservation->start_time = $request['start_time'];
         $bangquet_reservation->end_time = $request['end_time'];
         $bangquet_reservation->no_of_pax = $request['no_of_pax'];
@@ -199,12 +200,24 @@ class BangquetController extends Controller
         $bangquet_payment->total_payable = $request['total_payable'];
         $bangquet_payment->amount = $request['amount'];
         $bangquet_payment->balance = $request['balance'];
+        $bangquet_payment->payment_mode = $request['payment_mode'];
         $bangquet_payment->save();
 
         DB::table('bangquet_reservations')
             ->where('id', $id)
-            ->update(['paid_status' => 1]);
+            ->update(['paid_status' => 1,
+                    'payment_mode' => $request['payment_mode']]);
 
         return new BangquetPaymentResources($bangquet_payment);
+    }
+
+    public function delete_booking($id)
+    {
+        $booking = BangquetReservation::findOrFail($id);
+        $booking_detail = DB::table('bangquet_payments')->where('bangquet_id', '=', $id)->delete();
+
+        if($booking->delete()){
+            return new BangquetPaymentResources($booking);
+        }
     }
 }

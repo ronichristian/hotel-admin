@@ -89,6 +89,7 @@ class BookingsController extends Controller
         ->join('booking_details', 'booking_details.booking_id', '=', 'bookings.id')
         ->join('room_categories', 'room_categories.id', '=', 'booking_details.room_cat_id')
         ->join('guest_details', 'guest_details.id', '=', 'bookings.guest_id')
+        ->leftJoin('booking_payments', 'booking_payments.booking_id', 'bookings.id')
         ->select('room_categories.category_name', 
                 'room_categories.room_rate', 
                 'booking_details.room_cat_id',
@@ -100,15 +101,20 @@ class BookingsController extends Controller
                 'booking_details.nights',
                 'booking_details.status',
                 'bookings.paid_status',
-                'booking_details.total',
+                // 'booking_details.total',
                 'booking_details.room_no',
                 'bookings.number_of_rooms',
                 'guest_details.first_name',
                 'guest_details.last_name',
-                'bookings.grand_total')
+                'guest_details.email_address',
+                'guest_details.contact_number',
+                'guest_details.address',
+                'bookings.grand_total',
+                'bookings.payment_mode',
+                'booking_payments.charges')
         ->where('booking_details.id', '=', $id)
         ->get();
-        return new BookingDetailResources($booking_details);
+        return [new BookingDetailResources($booking_details), array_map('intval', explode(',',$booking_details[0]->charges))];
     }
 
     public function available_rooms(Request $request)
@@ -234,6 +240,7 @@ class BookingsController extends Controller
         $bookings->guest_id = $guest_id;
         $bookings->number_of_rooms = $request['number_of_rooms'];
         $bookings->grand_total = $interval;
+        $bookings->payment_mode = 'Unpaid';
         $bookings->paid_status = 0;
         $bookings->viewed_status = 0;
         $bookings->save();
@@ -320,7 +327,7 @@ class BookingsController extends Controller
 
         // Mail::send('dynamic_email_template', $data, function($message) use ($to_name, $to_email, $booking_id) {
         //     $message->to($to_email, $to_name)
-        //     ->subject('Reservation Confirmation');
+        //     ->subject('bo Confirmation');
         //     $message->from('ronichristian.puno@cmu.edu.ph', 'CMU Homestay');
         // });
 
@@ -380,8 +387,8 @@ class BookingsController extends Controller
     {
         $date_start = $request['check_in'];
         $date_end = $request['check_out'];
-        
-        if(date('Y-m-d', strtotime($date_start)) <= date('Y-m-d', strtotime(Carbon::now()->utc())))
+
+        if(date('Y-m-d', strtotime($date_start)) >= date('Y-m-d', strtotime(Carbon::now())))
         {
             $id = $request['id'];
             $booking_id = $request['booking_id'];
@@ -465,41 +472,46 @@ class BookingsController extends Controller
 
     public function payment(Request $request)
     {
-        // return $request;
+        // return $request[0]['charges'];
         $id = $request[0]['booking_id'];
         $payment = new BookingPayment;
         $payment->booking_id = $id;
         $payment->payment = $request[0]['payment'];
         $payment->amount_recieved = $request[0]['amount_recieved'];
+        $payment->payment_mode = $request[0]['payment_mode'];
+        $payment->charges = $request[0]['charges'];
         $payment->save();
 
         DB::table('bookings')
         ->where('id', $id)
-        ->update(['paid_status' => 1]);
+        ->update(['paid_status' => 1,
+                'grand_total' => $request[0]['payment'],
+                'payment_mode' => $request[0]['payment_mode']]);
 
         return new BookingPaymentResources($payment);
     }
 
     public function update_payment(Request $request)
-    {
-        $id = $request->booking_id;
-
-        $payment = new BookingPayment;
+    {   
+        $id = $request[0]['booking_id'];
 
         DB::table('booking_payments')
             ->where('booking_id', $id)
-            ->update(['payment' => $request->payment]);
+            ->update(['payment' => $request[0]['payment'],
+                    'payment_mode' => $request[0]['payment_mode'],
+                    'charges' => $request[0]['charges']]);
         
         DB::table('bookings')
             ->where('id', $id)
-            ->update(['grand_total' => $request->payment]);
+            ->update(['grand_total' => $request[0]['payment'],
+                    'payment_mode' => $request[0]['payment_mode']]);
 
         
         // DB::table('booking_details')
         //     ->where('booking_id', $id)
         //     ->update(['total' => $request->payment]);
         
-        return new BookingPaymentResources($payment);
+        return $request;
     }
 
     

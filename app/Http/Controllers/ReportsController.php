@@ -28,7 +28,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ReportsController extends Controller
 {
-    public function room_reports()
+    public function cash_room_reports()
     {
         $currentMonth = date('m');
         
@@ -36,19 +36,45 @@ class ReportsController extends Controller
             ->join('bookings', 'bookings.id', '=', 'booking_payments.booking_id')
             ->join('booking_details', 'booking_details.booking_id', '=', 'booking_payments.booking_id')
             ->join('guest_details', 'guest_details.id', '=', 'bookings.guest_id')
-            ->select('booking_payments.created_at', 'guest_details.last_name', 'guest_details.first_name', 'bookings.id', 'booking_payments.payment')
+            ->join('room_categories', 'room_categories.id', '=', 'booking_details.room_cat_id')
+            ->select('booking_details.room_no', 'room_categories.category_name', 'booking_payments.created_at', 'guest_details.last_name', 'guest_details.first_name', 'bookings.id', 'booking_payments.payment')
             ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
+            ->where('bookings.payment_mode', '=', 'cash')
             ->get();
         
         $total = DB::table('booking_payments')
-        ->select(DB::raw('sum(booking_payments.payment) as remit'))
-        ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
-        ->get();
+            ->select(DB::raw('sum(booking_payments.payment) as remit'))
+            ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
+            ->where('booking_payments.payment_mode', '=', 'cash')
+            ->get();
         
         return [new BookingPaymentResources($room_reports), 'total' => $total];
     }
 
-    public function month_room_report($monthNumber)
+    public function tof_room_reports()
+    {
+        $currentMonth = date('m');
+        
+        $room_reports = DB::table('booking_payments')
+            ->join('bookings', 'bookings.id', '=', 'booking_payments.booking_id')
+            ->join('booking_details', 'booking_details.booking_id', '=', 'booking_payments.booking_id')
+            ->join('guest_details', 'guest_details.id', '=', 'bookings.guest_id')
+            ->join('room_categories', 'room_categories.id', '=', 'booking_details.room_cat_id')
+            ->select('booking_details.room_no', 'room_categories.category_name', 'booking_payments.created_at', 'guest_details.last_name', 'guest_details.first_name', 'bookings.id', 'booking_payments.payment')
+            ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
+            ->where('bookings.payment_mode', '=', 'transfer of funds')
+            ->get();
+        
+        $total = DB::table('booking_payments')
+            ->select(DB::raw('sum(booking_payments.payment) as remit'))
+            ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
+            ->where('booking_payments.payment_mode', '=', 'transfer of funds')
+            ->get();
+        
+        return [new BookingPaymentResources($room_reports), 'total' => $total];
+    }
+
+    public function cash_month_room_report($monthNumber)
     {
         $currentMonth = $monthNumber;
         
@@ -56,38 +82,83 @@ class ReportsController extends Controller
             ->join('bookings', 'bookings.id', '=', 'booking_payments.booking_id')
             ->join('booking_details', 'booking_details.booking_id', '=', 'booking_payments.booking_id')
             ->join('guest_details', 'guest_details.id', '=', 'bookings.guest_id')
-            ->select('booking_payments.created_at', 'guest_details.last_name', 'guest_details.first_name', 'bookings.id', 'booking_payments.payment')
+            ->join('room_categories', 'room_categories.id', '=', 'booking_details.room_cat_id')
+            ->select('booking_details.room_no', 'room_categories.category_name', 'booking_payments.created_at', 'guest_details.last_name', 'guest_details.first_name', 'bookings.id', 'booking_payments.payment')
             ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
+            ->where('booking_payments.payment_mode', '=', 'cash')
             ->get();
-        
-        $total = DB::table('booking_payments')
-        ->select(DB::raw('sum(booking_payments.payment) as remit'))
-        ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
-        ->get();
-        
-        return [new BookingPaymentResources($room_reports), 'total' => $total];
-    }
-
-    public function specific_room_reports()
-    {
-        $currentMonth = date('m');
-        
-        $specific_room_reports = DB::table('booking_payments')
-            ->join('bookings', 'bookings.id', '=', 'booking_payments.booking_id')
-            ->join('booking_details', 'booking_details.booking_id', '=', 'booking_payments.booking_id')
-            ->join('room_categories', 'booking_details.room_cat_id', '=', 'room_categories.id')
-            ->select('category_name', DB::raw('sum(booking_details.total) as total_cost'))
-            ->groupBy('category_name', 'total')
-            ->distinct()
-            ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
-            ->get();
-        
         
         $total = DB::table('booking_payments')
             ->select(DB::raw('sum(booking_payments.payment) as remit'))
             ->whereRaw('MONTH(booking_payments.created_at) = ?',[$currentMonth])
+            ->where('booking_payments.payment_mode', '=', 'cash')
             ->get();
         
-        return [new BookingPaymentResources($specific_room_reports), 'total' => $total];
+        return [new BookingPaymentResources($room_reports), 'total' => $total];
+    }
+
+    // ----------------------------------------------------------------
+
+    public function cash_bangquet_reports()
+    {
+        $currentMonth = date('m');
+        
+        $bangquet_reports = DB::table('bangquet_payments')
+            ->join('bangquet_reservations', 'bangquet_reservations.id', '=', 'bangquet_payments.bangquet_id')
+            ->join('services', 'services.id', '=', 'bangquet_reservations.venue')
+            ->select('bangquet_reservations.event_name', 'bangquet_reservations.created_at', 'services.service_name', 'bangquet_payments.balance')
+            ->whereRaw('MONTH(bangquet_payments.created_at) = ?',[$currentMonth])
+            ->where('bangquet_reservations.payment_mode', '=', 'cash')
+            ->get();
+        
+        $total = DB::table('bangquet_payments')
+            ->select(DB::raw('sum(bangquet_payments.balance) as remit'))
+            ->whereRaw('MONTH(bangquet_payments.created_at) = ?',[$currentMonth])
+            ->where('bangquet_payments.payment_mode', '=', 'cash')
+            ->get();
+        
+        return [new BookingPaymentResources($bangquet_reports), 'total' => $total];
+    }
+
+    public function tof_bangquet_reports()
+    {
+        $currentMonth = date('m');
+        
+        $bangquet_reports = DB::table('bangquet_payments')
+            ->join('bangquet_reservations', 'bangquet_reservations.id', '=', 'bangquet_payments.bangquet_id')
+            ->join('services', 'services.id', '=', 'bangquet_reservations.venue')
+            ->select('bangquet_reservations.event_name', 'bangquet_reservations.created_at', 'services.service_name', 'bangquet_payments.balance')
+            ->whereRaw('MONTH(bangquet_payments.created_at) = ?',[$currentMonth])
+            ->where('bangquet_reservations.payment_mode', '=', 'transfer of funds')
+            ->get();
+        
+        $total = DB::table('bangquet_payments')
+            ->select(DB::raw('sum(bangquet_payments.balance) as remit'))
+            ->whereRaw('MONTH(bangquet_payments.created_at) = ?',[$currentMonth])
+            ->where('bangquet_payments.payment_mode', '=', 'transfer of funds')
+            ->get();
+        
+        return [new BookingPaymentResources($bangquet_reports), 'total' => $total];
+    }
+
+    public function cash_month_bangquet_report($monthNumber)
+    {
+        $currentMonth = $monthNumber;
+        
+        $bangquet_reports = DB::table('bangquet_payments')
+            ->join('bangquet_reservations', 'bangquet_reservations.id', '=', 'bangquet_payments.bangquet_id')
+            ->join('services', 'services.id', '=', 'bangquet_reservations.venue')
+            ->select('bangquet_reservations.event_name', 'bangquet_reservations.created_at', 'services.service_name', 'bangquet_payments.balance')
+            ->whereRaw('MONTH(bangquet_payments.created_at) = ?',[$currentMonth])
+            ->where('bangquet_reservations.payment_mode', '=', 'cash')
+            ->get();
+        
+        $total = DB::table('bangquet_payments')
+            ->select(DB::raw('sum(bangquet_payments.balance) as remit'))
+            ->whereRaw('MONTH(bangquet_payments.created_at) = ?',[$currentMonth])
+            ->where('bangquet_payments.payment_mode', '=', 'cash')
+            ->get();
+        
+        return [new BookingPaymentResources($bangquet_reports), 'total' => $total];
     }
 }

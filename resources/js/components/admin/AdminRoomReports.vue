@@ -4,8 +4,8 @@
     <div class="card">
         <div class="card-header p-2">
             <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Month Room Report</a></li>
-                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Specific Room</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Cash Month Report</a></li>
+                <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">TOF Month Report</a></li>
             </ul>
         </div><!-- /.card-header -->
         <div class="card-body">
@@ -63,6 +63,7 @@
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
                                     <b>Invoice #007612</b><br>
+                                    Payment Method: <b>Cash</b><br>
                                 </div>
                             <!-- /.col -->
                             </div>
@@ -76,17 +77,20 @@
                                             <tr>
                                                 <th>Date</th>
                                                 <th>Detail</th>
+                                                <th>Room</th>
+                                                <th>Room No.</th>
                                                 <th>Booking No.</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="room_report in room_reports" v-bind:key="room_report.id">
+                                            <tr v-for="room_report in cash_room_reports" v-bind:key="room_report.id">
                                                 <td align="">{{ room_report.created_at | moment("dddd, MMMM Do YYYY") }}</td>
                                                 <td align="">{{ room_report.last_name }}, {{ room_report.first_name }}</td>
-                                                <td align="">{{ room_report.id }}</td>
-                                                <td align="">{{ room_report.payment | currency }}</td>
-                                                <td align="">{{ room_report.payment | currency }}</td>
+                                                <td align="">{{ room_report.category_name }}</td>
+                                                <td align="center">{{ room_report.room_no }}</td>
+                                                <td align="center">{{ room_report.id }}</td>
+                                                <td align="right">{{ room_report.payment | currency }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -109,7 +113,7 @@
                                             <tbody>
                                                 <tr>
                                                     <th>Revenue:</th>
-                                                    <td style="color:red; font-weight: 600;">{{total | currency}}</td>
+                                                    <td style="color:red; font-weight: 600;">{{this.cash_report_total | currency}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -188,6 +192,7 @@
                                 <!-- /.col -->
                                 <div class="col-sm-4 invoice-col">
                                     <b>Invoice #007612</b><br>
+                                    Payment Method: <b>Transfer of Funds</b><br>
                                 </div>
                             <!-- /.col -->
                             </div>
@@ -199,14 +204,22 @@
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Room Name</th>
+                                                <th>Date</th>
+                                                <th>Detail</th>
+                                                <th>Room</th>
+                                                <th>Room No.</th>
+                                                <th>Booking No.</th>
                                                 <th>Total</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr v-for="specific_room_report in specific_room_reports" v-bind:key="specific_room_report.id">
-                                                <td align="">{{ specific_room_report.category_name }}</td>
-                                                <td align="">{{ specific_room_report.total_cost | currency }}</td>
+                                            <tr v-for="room_report in tof_room_reports" v-bind:key="room_report.id">
+                                                <td align="">{{ room_report.created_at | moment("dddd, MMMM Do YYYY") }}</td>
+                                                <td align="">{{ room_report.last_name }}, {{ room_report.first_name }}</td>
+                                                <td align="">{{ room_report.category_name }}</td>
+                                                <td align="center">{{ room_report.room_no }}</td>
+                                                <td align="center">{{ room_report.id }}</td>
+                                                <td align="right">{{ room_report.payment | currency }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -229,7 +242,7 @@
                                             <tbody>
                                                 <tr>
                                                     <th>Revenue:</th>
-                                                    <td>{{ total | currency }}</td>
+                                                    <td>{{ tof_report_total | currency }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -277,9 +290,10 @@ export default {
     data(){
         return {
             date: '',
-            room_reports: [],
-            specific_room_reports: [],
-            total: 0,
+            cash_room_reports: [],
+            tof_room_reports: [],
+            cash_report_total: 0,
+            tof_report_total: 0,
             selectedMonth: '',
             monthLabels: [
                 '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'
@@ -288,12 +302,12 @@ export default {
     },
     
     created(){
-        this.getRoomReports();
-        this.getSpecificRoomReports();
+        this.getCashRoomReports();
+        this.getTOFRoomReports();
     },
 
     methods:{
-        getRoomReports(){
+        getCashRoomReports(){
             var d1 = new Date(),
             month1 = '' + (d1.getMonth() + 1),
             day1 = '' + d1.getDate(),
@@ -305,21 +319,21 @@ export default {
             var dyanamicCurrentDate = [month1, month1, year1].join('/')
             this.selectedMonth = dyanamicCurrentDate;
 
-            axios.get('/api/room_reports')
+            axios.get('/api/cash_room_reports')
             .then(res => {
-                this.room_reports = res.data[0];
-                this.total = res.data.total[0]['remit']
+                this.cash_room_reports = res.data[0];
+                this.cash_report_total = res.data.total[0]['remit']
             })
             .catch(err => {
                 console.log(err)
             })
         },
 
-        getSpecificRoomReports(){
-             axios.get('/api/specific_room_reports')
+        getTOFRoomReports(){
+             axios.get('/api/tof_room_reports')
             .then(res => {
-                this.specific_room_reports = res.data[0];
-                this.total = res.data.total[0]['remit']
+                this.tof_room_reports = res.data[0];
+                this.tof_report_total = res.data.total[0]['remit']
             })
             .catch(err => {
                 console.log(err)
@@ -330,10 +344,10 @@ export default {
             var date = new Date(this.selectedMonth);
             var monthNumber = date.getMonth() + 1;
 
-            axios.get('/api/month_room_report/'+monthNumber)
+            axios.get('/api/cash_month_room_report/'+monthNumber)
             .then(res => {
-                this.room_reports = res.data[0];
-                this.total = res.data.total[0]['remit']
+                this.cash_room_reports = res.data[0];
+                this.cash_report_total = res.data.total[0]['remit']
             })
             .catch(err => {
                 console.log(err)

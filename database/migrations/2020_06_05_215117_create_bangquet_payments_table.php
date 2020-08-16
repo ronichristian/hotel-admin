@@ -19,6 +19,7 @@ class CreateBangquetPaymentsTable extends Migration
             $table->double('total_payable');
             $table->double('amount');
             $table->double('balance');
+            $table->string('payment_mode');
             $table->timestamps();
         });
     }

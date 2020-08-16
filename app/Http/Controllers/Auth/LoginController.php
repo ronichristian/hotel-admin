@@ -30,10 +30,12 @@ class LoginController extends Controller
 
     public function redirectTo()
     {
-        if (auth()->user()->roles()->first()->name == 'admin') {
+        if (auth()->user()->roles()->first()->name == 'superadmin') {
             return '/dashboard';
-        } else if (auth()->user()->roles()->first()->name == 'user') {
-            return '/client';
+        } else if (auth()->user()->roles()->first()->name == 'bangquet') {
+            return '/admin_bangquet_reservation';
+        } else if (auth()->user()->roles()->first()->name == 'accommodation') {
+            return '/admin_room_bookings';
         } else {
             return '/';
         }

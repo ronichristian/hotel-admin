@@ -15,22 +15,22 @@ class UsersTableSeeder extends Seeder
     {
         User::truncate();
 
-        $adminRole = Role::where('name', 'admin')->first();
-        $userRole = Role::where('name', 'user')->first();
+        $adminRole = Role::where('name', 'superadmin')->first();
+        $bangquetRole = Role::where('name', 'bangquet')->first();
 
         $admin = User::create([
-            'name' => 'Admin',
+            'name' => 'Roni Christian Puno',
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt('qweqwe123')
         ]);
 
         $user = User::create([
-            'name' => 'User',
+            'name' => 'Bangquet User',
             'email' => 'puno.roni@gmail.com',
             'password' => bcrypt('qweqwe123')
         ]);
 
         $admin->roles()->attach($adminRole);
-        $user->roles()->attach($userRole);
+        $user->roles()->attach($bangquetRole);
     }
 }

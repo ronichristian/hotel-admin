@@ -18,6 +18,7 @@ class CreateBookingsTable extends Migration
             $table->integer('guest_id');
             $table->integer('number_of_rooms');
             $table->integer('grand_total');
+            $table->string('payment_mode');
             $table->boolean('paid_status');
             $table->boolean('viewed_status');
             $table->timestamps();

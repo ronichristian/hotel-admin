@@ -29,6 +29,7 @@ class CreateBangquetReservationsTable extends Migration
             $table->date('time_of_event');
             $table->integer('no_of_pax')->nullable();
             $table->string('motif')->nullable();
+            $table->string('payment_mode');
             $table->timestamps();
         });
     }

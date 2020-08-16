@@ -17,6 +17,7 @@ class CreateBookingPaymentsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('booking_id');
             $table->double('payment');
+            $table->string('payment_mode');
             $table->double('amount_recieved');
             $table->timestamps();
         });

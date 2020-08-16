@@ -4,6 +4,7 @@
         <div style="max-width: 80%; max-height: 20%;" class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h1>Check in</h1>  
                     <!-- <h5 class="modal-title" id="exampleModalLabel" style="font-weight: 700; color:green;">{{ category_name.toUpperCase() }}</h5> -->
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>

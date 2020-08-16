@@ -15,6 +15,11 @@ use Calendar;
 
 class PagesController extends Controller
 {
+    public function admin_create_accounts() 
+    {
+        return view('admin_side.admin_create_accounts');
+    }
+
     public function index()
     {
         return view('client_side.index');
@@ -171,7 +176,7 @@ class PagesController extends Controller
         );
     }
 
-    public function admin_calendar()
+    public function admin_room_bookings()
     {
         $booking_details = DB::table('bookings')
         ->join('booking_details', 'booking_details.booking_id', '=', 'bookings.id')
@@ -240,7 +245,7 @@ class PagesController extends Controller
                     'eventClick' => 'function(event) {  $("#bookingDetail").modal(); }',
                 ]);
         $room_categories = RoomCategory::all();
-        return view('admin_side.admin_calendar', ['calendar' => $calendar, 'room_categories' => $room_categories]);
+        return view('admin_side.admin_room_bookings', ['calendar' => $calendar, 'room_categories' => $room_categories]);
     }
 
     public function admin_bangquet_reservation()
@@ -389,5 +394,11 @@ class PagesController extends Controller
     {
         return view('admin_side.admin_room_reports');
     }
+
+    public function admin_bangquet_reports()
+    {
+        return view('admin_side.admin_bangquet_reports');
+    }
+    
 
 }

@@ -6,31 +6,33 @@
             <div style="max-width: 90%;" class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Booking</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Bangquet Reservation Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form @submit.prevent="bangquetReservationUpdate">
+                        <form @submit.prevent="bangquetReservation">
                             <div class="row">
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Event Name</label>
                                     <input type="text" v-model="bangquet_reservation.event_name" name="event_name" class="form-control" placeholder="Event Name">
                                 </div>
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Engager's Name</label>
                                     <input type="text" v-model="bangquet_reservation.engager_name" name="engager_name" class="form-control" placeholder="Name">
                                 </div>
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Address</label>
                                     <input type="text" v-model="bangquet_reservation.address" name="address" class="form-control" placeholder="Address">
                                 </div>
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6"></div>
+
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Company/Group</label>
                                     <input type="text" v-model="bangquet_reservation.company" name="company" class="form-control" placeholder="Company Name">
                                 </div>
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Address</label>
                                     <input type="text" v-model="bangquet_reservation.company_address" name="company_address" class="form-control" placeholder="Address">
                                 </div>
@@ -103,7 +105,7 @@
 
                             </div>
                             <br>
-                            <button style="margin-left: 51%;" type="submit" class="btn btn-primary btn-sm">
+                            <button @click="bangquetReservationUpdate()" style="margin-left: 51%;" type="submit" class="btn btn-primary btn-sm">
                                 Submit
                             </button>
                             
@@ -111,9 +113,6 @@
                         
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Bangquet Payment</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
                         </div>
 
                         <form @submit.prevent="bangquetPayment">
@@ -131,6 +130,13 @@
                                     <label>Balance</label>
                                     <input type="text" v-model="bangquet_payment.balance" name="balance" class="form-control" placeholder="Balance">                           
                                 </div>
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
+                                    <label>Mode of Payment</label>
+                                    <select class="form-control" v-model="bangquet_payment.payment_mode" name="payment_mode" required>
+                                        <option value="transfer of funds">Transfer of Funds</option>
+                                        <option value="cash">Cash</option>
+                                    </select>
+                                </div>
 
                             </div>
                             <br>
@@ -145,7 +151,8 @@
                     </div>
                     <div class="modal-footer">
                         
-                        <button type="button" class="btn btn-danger btn-sm float-left">
+                        <!-- <button v-if="booking_detail.status == 'checkout'" type="button" class="btn btn-danger btn-sm float-left" disabled>Delete Booking</button> -->
+                        <button @click="deleteBooking(bangquet_reservation.id)" type="button" class="btn btn-danger btn-sm float-left">
                             <i class="fa fa-trash"></i>
                             Delete Booking
                         </button>
@@ -155,12 +162,11 @@
             </div>
         </div>
 
-
-        <div class="modal modal fade bd-example-modal-xl" id="bangquetPayment" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal modal fade bd-example-modal-xl" id="reserveBangquet" tabindex="-1" role="dialog" aria-hidden="true">
             <div style="max-width: 90%;" class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Booking</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Reserve Banguqet</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -168,23 +174,25 @@
                     <div class="modal-body">
                         <form @submit.prevent="bangquetReservation">
                             <div class="row">
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Event Name</label>
                                     <input type="text" v-model="bangquet_reservation.event_name" name="event_name" class="form-control" placeholder="Event Name">
                                 </div>
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Engager's Name</label>
                                     <input type="text" v-model="bangquet_reservation.engager_name" name="engager_name" class="form-control" placeholder="Name">
                                 </div>
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Address</label>
                                     <input type="text" v-model="bangquet_reservation.address" name="address" class="form-control" placeholder="Address">
                                 </div>
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6"></div>
+
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Company/Group</label>
                                     <input type="text" v-model="bangquet_reservation.company" name="company" class="form-control" placeholder="Company Name">
                                 </div>
-                                <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Address</label>
                                     <input type="text" v-model="bangquet_reservation.company_address" name="company_address" class="form-control" placeholder="Address">
                                 </div>
@@ -208,12 +216,22 @@
                                     <label>Motif</label>
                                     <input type="text" v-model="bangquet_reservation.motif" name="motif" class="form-control" placeholder="Motif">
                                 </div>
+                                
+                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
+                                    <label>Room Name</label>
+                                    <select v-model="bangquet_reservation.venue" name="venue" class="form-control" >
+                                        <option disabled></option>
+                                        <option v-for="venue in this.venues" :key="venue.id" :value="venue.id">
+                                            {{venue.service_name}}
+                                        </option>
+                                    </select>
+                                </div>
                                 <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Date of Event</label>
                                     <!-- <datetime type="datetime" v-model="bangquet_reservation.date_of_event" use12-hour></datetime> -->
                                     <datetime
                                         type="datetime"
-                                        v-model="bangquet_reservation.date_of_event"
+                                        v-model="bangquet_reservation.start_time"
                                         input-class="my-class"
                                         zone="local"
                                         value-zone="local"
@@ -224,7 +242,7 @@
                                         use12-hour
                                         auto
                                         >
-                                        </datetime>
+                                    </datetime>
                                 </div>
                                 
                                 <!-- <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
@@ -244,15 +262,6 @@
                                     </div>
                                 </div> -->
 
-                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
-                                    <label>Room Name</label>
-                                    <select v-model="bangquet_reservation.venue" name="venue" class="form-control" >
-                                        <option disabled></option>
-                                        <option v-for="venue in this.venues" :key="venue.id" :value="venue.id">
-                                            {{venue.service_name}}
-                                        </option>
-                                    </select>
-                                </div>
 
                             </div>
                             <br>
@@ -294,7 +303,7 @@
         </div> 
 
         <div class="demo-app-top">
-            <button style="margin-left: 1.5%; margin-top: -3%" data-toggle="modal" data-target="#bangquetPayment" class="btn btn-info btn-sm">Reserve Bangquet</button>
+            <button style="margin-left: 1.5%; margin-top: -3%" data-toggle="modal" data-target="#reserveBangquet" class="btn btn-info btn-sm" @click="clear()">Reserve Bangquet</button>
         </div>
 
         <FullCalendar
@@ -388,13 +397,16 @@ export default {
                 end_time: '',
                 no_of_pax: '',
                 motif: '',
+                payment_mode: '',
             },
             bangquet_payment: {
                 bangquet_id: '',
                 total_payable: '',
                 amount: '',
                 balance: '',
-            }
+                payment_mode: '',
+            },
+            edit: false,
         };
     },
 
@@ -404,6 +416,30 @@ export default {
     },
 
     methods: {
+        deleteBooking(id){
+            swal({
+                title: "Are you sure?",
+                text: 'Confirm To "DELETE" this booking',
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete(`/api/delete_booking/${id}`)
+                    .then(res => {
+                        this.calendarEvents = [];
+                        this.fetchData();
+                        swal("Confirmed", "Booking Reservation Deleted", "success");
+                        $("#bangquetReservationDetail").modal('hide');
+                    })
+                    .catch(err => {
+                        swal("Oops", "Something went wrong", "error");
+                    })
+                }
+            });
+        },
+
         bangquetPayment(){
             swal({
                 title: "Are you sure?",
@@ -416,6 +452,10 @@ export default {
                 if (willDelete) {
                     axios.post('/api/bangquet_payment', this.bangquet_payment)
                     .then(res => { 
+                        this.bangquet_payment.total_payable = '';
+                        this.bangquet_payment.balance = '';
+                        this.bangquet_payment.amount = '';
+                        this.bangquet_payment.payment_mode = '';
                         this.calendarEvents = [];
                         this.fetchData();
                         $("#bangquetReservationDetail").modal('hide');
@@ -429,48 +469,58 @@ export default {
         },
 
         bangquetReservationUpdate(){
-            swal({
-                title: "Are you sure?",
-                text: "Confirm To Update Booking",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    axios.put('/api/bangquetReservationUpdate', this.bangquet_reservation)
-                    .then(res => {
-                        $("#bangquetReservationDetail").modal('hide');
-                        swal("Success", "Bangquet Booking Updated", "success");
-                    })
-                    .catch(err => {
-                        swal("Oops", "Something went wrong", "error");
-                    })
-                }
-            });
+            this.edit = true;
         },
 
         bangquetReservation(){
-            axios.post('/api/reserve_bangquet', this.bangquet_reservation)
-            .then(data => {
-                this.bangquet_reservation.event_name = '';
-                this.bangquet_reservation.engager_name = '';
-                this.bangquet_reservation.address = '';
-                this.bangquet_reservation.company = '';
-                this.bangquet_reservation.company_address = '';
-                this.bangquet_reservation.status = '';
-                this.bangquet_reservation.phone_number = '';
-                this.bangquet_reservation.email_address = '';
-                this.bangquet_reservation.date_of_event = '';
-                this.bangquet_reservation.start_time = '';
-                this.bangquet_reservation.no_of_pax = '';
-                this.bangquet_reservation.motif = '';
-                swal("Success", "Bangquet Booking Successful", "success");
-            })
-            .catch(errors => {
-                toastr.error("Error", "Oops something room", "error");
-            });
+            if(this.edit == false){
+                axios.post('/api/reserve_bangquet', this.bangquet_reservation)
+                .then(data => {
+                    this.bangquet_reservation.event_name = '';
+                    this.bangquet_reservation.engager_name = '';
+                    this.bangquet_reservation.address = '';
+                    this.bangquet_reservation.company = '';
+                    this.bangquet_reservation.company_address = '';
+                    this.bangquet_reservation.status = '';
+                    this.bangquet_reservation.phone_number = '';
+                    this.bangquet_reservation.email_address = '';
+                    this.bangquet_reservation.date_of_event = '';
+                    this.bangquet_reservation.start_time = '';
+                    this.bangquet_reservation.no_of_pax = '';
+                    this.bangquet_reservation.motif = '';
+                    $("#bangquetReservationDetail").modal('hide');
+                    swal("Success", "Bangquet Booking Successful", "success");
+                })
+                .catch(errors => {
+                    toastr.error("Error", "Oops something room", "error");
+                });
+            }else if(this.edit == true){
+                swal({
+                    title: "Are you sure?",
+                    text: "Confirm To Update Booking",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        this.edit = false;
+                        this.bag
+                        axios.put('/api/bangquetReservationUpdate', this.bangquet_reservation)
+                        .then(res => {
+                            $("#bangquetReservationDetail").modal('hide');
+                            swal("Success", "Bangquet Booking Updated", "success");
+                            this.calendarEvents = [];
+                            this.fetchData();
+                        })
+                        .catch(err => {
+                            swal("Oops", "Something went wrong", "error");
+                        })
+                    }
+                });
+            }
         },
+
 
         handleSelect(e){
             $("#bangquetReservationDetail").modal();
@@ -491,12 +541,12 @@ export default {
                 this.bangquet_reservation.start_time = this.bangquet_reservations[0].start_time;
                 this.bangquet_reservation.no_of_pax = this.bangquet_reservations[0].no_of_pax;
                 this.bangquet_reservation.motif = this.bangquet_reservations[0].motif;
+                this.bangquet_reservation.payment_mode = this.bangquet_reservations[0].payment_mode;
+                this.bangquet_payment.payment_mode = this.bangquet_reservations[0].payment_mode;
 
                 this.bangquet_reservation.paid_status = this.bangquet_reservations[0].paid_status;
                 
                 this.bangquet_payment.bangquet_id = this.bangquet_reservations[0].id;
-
-                console.log(this.bangquet_reservations[0].date_of_event)
             })
             .catch(err => {
                 console.log(err)
@@ -523,7 +573,7 @@ export default {
                     this.calendarEvents.push(
                         {
                             color: color,
-                            title: 'Venue - ' + this.data[i].service_name,
+                            title: 'Event - '+ this.data[i].event_name + 'Venue - ' + this.data[i].service_name,
                             url: '#', 
                             start: new Date(this.data[i].date_of_event),
                             eventID: this.data[i].id
@@ -549,6 +599,22 @@ export default {
         dispatch (e) {
             this.$emit('input', e)
             this.selected = e
+        },
+        
+        clear(){
+            this.edit = false;
+            this.bangquet_reservation.event_name = '';
+            this.bangquet_reservation.engager_name = '';
+            this.bangquet_reservation.address = '';
+            this.bangquet_reservation.company = '';
+            this.bangquet_reservation.company_address = '';
+            this.bangquet_reservation.status = '';
+            this.bangquet_reservation.phone_number = '';
+            this.bangquet_reservation.email_address = '';
+            this.bangquet_reservation.date_of_event = '';
+            this.bangquet_reservation.start_time = '';
+            this.bangquet_reservation.no_of_pax = '';
+            this.bangquet_reservation.motif = '';
         },
       
     }

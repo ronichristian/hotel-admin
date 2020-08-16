@@ -89,7 +89,6 @@ Route::put('charge', 'ServicesController@add_charge');
 Route::delete('charge/{id}', 'ServicesController@delete_charge');
 
 
-
 // Get Rooms Status
 Route::get('room_status', 'RoomsController@room_status');
 // Admin Calculate
@@ -104,17 +103,23 @@ Route::post('update_payment', 'BookingsController@update_payment');
 Route::get('get_booking/{id}', 'BookingsController@get_booking');
 
 
-// Room Reports
-Route::get('room_reports', 'ReportsController@room_reports');
-// Specific Room Reports
-Route::get('specific_room_reports', 'ReportsController@specific_room_reports');
+// Cash Room Reports
+Route::get('cash_room_reports', 'ReportsController@cash_room_reports');
+// TOF Room Reports
+Route::get('tof_room_reports', 'ReportsController@tof_room_reports');
 // Room Reports By Month
-Route::get('month_room_report/{id}', 'ReportsController@month_room_report');
+Route::get('cash_month_room_report/{id}', 'ReportsController@cash_month_room_report');
 // Get all specific booking details
 Route::get('get_bookings', 'BookingsController@get_bookings');
 // Get Current Booking
 Route::put('updateCurrentBooking', 'BookingsController@updateCurrentBooking');
 
+// Cash Bangquet Reports
+Route::get('cash_bangquet_reports', 'ReportsController@cash_bangquet_reports');
+// TOF Bangquet Reports
+Route::get('tof_bangquet_reports', 'ReportsController@tof_bangquet_reports');
+// Cash Month Bangquet Report
+Route::get('cash_month_bangquet_report/{id}', 'ReportsController@cash_month_bangquet_report');
 
 
 // Get Current Booking
@@ -127,6 +132,8 @@ Route::get('get_bangquet_reservations', 'BangquetController@get_bangquet_reserva
 Route::get('get_bangquet_reservation/{id}', 'BangquetController@get_bangquet_reservation');
 // Get Rooms Status
 Route::put('bangquetReservationUpdate', 'BangquetController@bangquetReservationUpdate');
+// Delete Bangquet Booking
+Route::delete('delete_booking/{id}', 'BangquetController@delete_booking');
 
 // Bangquet Payment
 Route::post('bangquet_payment', 'BangquetController@bangquet_payment');

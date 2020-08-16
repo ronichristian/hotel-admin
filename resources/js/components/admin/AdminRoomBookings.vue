@@ -1,251 +1,5 @@
 <template>
     <div class="demo-app">
-
-        <!-- <div class="modal modal fade bd-example-modal-xl" id="bookingDetail" tabindex="-1" role="dialog" aria-hidden="true"> -->
-        <div class="modal modal fade bd-example-modal-xl" id="" tabindex="-1" role="dialog" aria-hidden="true">
-            <div style="max-width: 90%;" class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Edit Booking</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="panel panel-default">
-                            <div class="invoice p-3 mb-3"  style="border: 1px solid black;">
-
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h4>    
-                                        <i class="fas fa-globe"></i> UFLS Homestay
-                                            <small class="float-right">
-                                                Date: 
-                                            </small>
-                                        </h4>
-                                    </div>
-                                </div>
-
-                                <div class="row invoice-info">
-                                     <div class="col-sm-4 invoice-col">
-                                        <b>Guest Details</b><br>
-                                    </div>
-                                </div><br>
-
-                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
-                                                <div class="row with-border">
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <label>GUEST DETAILS</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
-                                                <div class="row with-border">
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <label>Name</label>
-                                                    </div>
-                                                    <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
-                                                        <p>Puno, Roni Christian C.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
-                                                <div class="row with-border">
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <label>Address</label>
-                                                    </div>
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <p>CMU BUKIDNON</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                <div class="row with-border">
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <label>Contact #</label>
-                                                    </div>
-                                                    <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                        <p>019230123123</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                <div class="row with-border">
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <label>ID Number</label>
-                                                    </div>
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <p>201591312</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                <div class="row with-border">
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <label>Student</label>
-                                                    </div>
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <p>check</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="col-md-12 mb-12 mb-lg-12 col-lg-12" style="margin-top: -24px;">
-                                                <div class="row with-border">
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <label>Purpose of Stay</label>
-                                                    </div>
-                                                    <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
-                                                        <p> asdasdqweq</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 mb-6 mb-lg-6 col-lg-6" style="margin-top: -4px;">
-                                                <div class="row with-border">
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <label>Nationality</label>
-                                                    </div>
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <p>asdqweasdqwe</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3 mb-3 mb-lg-3 col-lg-3" style="margin-top: -4px;">
-                                                <div class="row with-border">
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <label>No. of Pax</label>
-                                                    </div>
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <p>asdqweasdqwe</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                             <div class="col-md-3 mb-3 mb-lg-4 col-lg-3" style="margin-top: -4px;">
-                                                <div class="row with-border">
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <label>Gender</label>
-                                                    </div>
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <p>asdqweasdqwe</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 mb-6 mb-lg-6 col-lg-6" style="margin-top: -25px;">
-                                                <div class="row with-border">
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <label>Date of Arrival</label>
-                                                    </div>
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <p>2/05/2020</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mb-6 mb-lg-6 col-lg-6" style="margin-top: -25px;">
-                                                <div class="row with-border">
-                                                    <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
-                                                        <label>Date of Departure</label>
-                                                    </div>
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <p>2/07/2020</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6 mb-6 mb-lg-6 col-lg-6" style="margin-top: -5px;">
-                                                <div class="row with-border">
-                                                    <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                        <label>Time</label>
-                                                    </div>
-                                                    <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                        <p>2/07/2020</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6 mb-6 mb-lg-6 col-lg-6" style="margin-top: -5px;">
-                                                <div class="row with-border">
-                                                    <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                        <label>Time</label>
-                                                    </div>
-                                                    <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                        <p>2/07/2020</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                 <div class="row">
-                                    <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
-                                        <div class="row ">
-                                            
-                                        </div>
-                                    </div>
-                                 </div>
-
-                                 <br>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
-                                                <div class="row with-border">
-                                                    <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
-                                                        <label>ROOM TYPE & NUMBER</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-12 mb-12 mb-lg-12 col-lg-12">
-                                                <div class="row with-border">
-                                                    
-                                                    <div class="col-md-6 mb-6 mb-lg-12 col-lg-6" style="">
-                                                        <div class="row with-border">
-                                                            <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                                <label>Room Type</label>
-                                                            </div>
-                                                            <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                                <p>Executive</p>
-                                                            </div>
-                                                            <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                                <label>Room Number</label>
-                                                            </div>
-                                                            <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                                <p>101</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6 mb-6 mb-lg-6 col-lg-6" style="">
-                                                        <div class="row with-border">
-                                                            <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                                <label>Additionals</label>
-                                                            </div>
-                                                            <div class="col-md-3 mb-3 mb-lg-3 col-lg-3">
-                                                                <p>2/07/2020</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
         <!-- DETAIL MODAL -->
         <div class="modal modal fade bd-example-modal-xl" id="bookingDetail" tabindex="-1" role="dialog" aria-hidden="true">
         <!-- <div class="modal modal fade bd-example-modal-xl" id="" tabindex="-1" role="dialog" aria-hidden="true"> -->
@@ -273,13 +27,13 @@
 
                                 <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Room Name</label>
-                                    <select  v-if="booking_detail.status == 'checkout'" disabled class="form-control" >
+                                    <select v-if="booking_detail.status == 'checkout'" disabled class="form-control" v-model="booking_detail.room_cat_id">
                                         <option disabled>{{cat_name}}</option>
                                         <option v-for="room_cat in this.room_categories" :key="room_cat.id" :value="room_cat.id">
-                                            
+                                            {{room_cat.category_name}}
                                         </option>
                                     </select>
-                                    <select  v-else  class="form-control" v-model="booking_detail.room_cat_id" @click="getRoomNos()" @change="clearRoomNo()">
+                                    <select v-else class="form-control" v-model="booking_detail.room_cat_id" @click="getRoomNos()" @change="clearRoomNo()">
                                         <option disabled>{{cat_name}}</option>
                                         <option v-for="room_cat in this.room_categories" :key="room_cat.id" :value="room_cat.id">
                                             {{room_cat.category_name}}
@@ -289,8 +43,11 @@
 
                                 <div class="col-md-3 mb-6 mb-lg-6 col-lg-3">
                                     <label>Room Number</label>
-                                    <select v-if="booking_detail.status == 'checkout'" disabled class="form-control" v-model="booking_detail.room_no" required>
-                                        
+                                    <select style="font-weight: 700; color:green" v-if="booking_detail.status == 'checkout'" disabled class="form-control" v-model="booking_detail.room_no">
+                                        <option disabled>{{this.roomno}}</option>  
+                                        <option v-for="room_number in this.room_numbers" :key="room_number.id">
+                                            {{room_number.room_no}}
+                                        </option>
                                     </select>
                                     <select style="font-weight: 700; color:green" v-else class="form-control" v-model="booking_detail.room_no" required>
                                         <option disabled>{{this.roomno}}</option>  
@@ -302,12 +59,6 @@
 
                                 
                                 <div class="col-md-3 mb-6 mb-lg-6 col-lg-3">
-                                    <!-- 
-                                        #0275d8 - blue
-                                        #5cb85c - green
-                                        #d9534f - red
-                                        #f0ad4e - yellow
-                                     -->
                                     <label>Status</label>
                                     <p v-if="booking_detail.status == 'occupied' && booking_detail.paid_status == 0" 
                                         style="color:#d9534f; font-weight: 800;" 
@@ -348,7 +99,7 @@
                                 </div>
                                 <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Total</label>
-                                    <input disabled type="number" v-model="booking_detail.total" class="form-control">
+                                    <input disabled type="number" v-model="booking_detail.grand_total" class="form-control">
                                     <!-- <input v-if="booking_detail.status == 'checkout'" disabled  type="number" v-model="booking_detail.total" class="form-control">
                                     <input v-else type="number" v-model="booking_detail.total" class="form-control"> -->
                                 </div>
@@ -360,57 +111,65 @@
                             </button>
                             
                         </form>
-                        <br>
+                        <hr>
 
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Booking Payment</h5>
+                        <div class="">
+                            <h5 class="modal-title" id="exampleModalLabel">Booking Payment</h5><br>
                         </div>
 
                         <form @submit.prevent="payment" class="form-horizontal">
-                             <div class="row">
-                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-md-2 mb-2 mb-lg-2 col-lg-2">
                                     <label>Invoice No.</label>
                                     <p class="form-control"> {{ id }} </p>
                                 </div>
                                 <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
+                                    <label>Guest</label>
+                                    <p class="form-control"> {{ name }} </p>
+                                </div>
+                                <div class="col-md-4 mb-4 mb-lg-4 col-lg-4">
                                     <label>Date</label>
                                     <p class="form-control"> {{ today_date }} </p>
                                 </div>
 
-                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
-                                    <label>Guest</label>
-                                    <p class="form-control"> {{ name }} </p>
-                                </div>
-
-                                <div class="col-md-3 mb-6 mb-lg-6 col-lg-3">
+                                <div style="margin-top:-2%;" class="col-md-3 mb-3 mb-lg-3 col-lg-3">
                                     <label>Charges</label>
+                                    <!-- <input type="checkbox" class="form-check-input" checked> -->
                                     <div class="col-sm-10">
-                                        <div v-for="charge in charges" v-bind:key="charge.id" class="form-check">
-                                            <input @change="computeTotalCharges(charge)" class="form-check-input" type="checkbox" :value="charge" v-model="checkedPrices">
+                                        <div v-for="(charge, index) in charges" v-bind:key="charge.id" class="form-check"> 
+                                            <!-- <div v-for="id in chargeIds" v-bind:key="id.id"> -->
+                                            <input type="checkbox" :value="charge" @change="computeTotalCharges(charge, $event, index)" 
+                                                v-if="chargeIds.includes(charge.id)" checked
+                                                class="form-check-input">
+                                            <input type="checkbox" :value="charge" @change="computeTotalCharges(charge, $event, index)" 
+                                                v-else
+                                                class="form-check-input">
                                             <label class="form-check-label" for="defaultCheck1">
-                                                {{charge.charge_name}}
+                                                {{charge.charge_name}} - {{charge.charge_price | currency }} 
                                             </label>
+                                            <!-- </div> -->
                                         </div>
                                     </div>
                                 </div>
+                                <div style="margin-top:-2%;" class="col-md-3 mb-3 mb-lg-3 col-lg-3">
+                                    <label>Mode of Payment</label>
+                                    <select v-if="this.booking_detail.status == 'checkout'" disabled class="form-control" >
+                                        <option v-if="paid_status == 0">Unpaid</option>
+                                        <option v-else>{{booking_payment.payment_mode}}</option>
+                                    </select>
+                                    <select v-else class="form-control" v-model="booking_payment.payment_mode" name="payment_mode" required>
+                                        <option value="transfer of funds">Transfer of Funds</option>
+                                        <option value="cash">Cash</option>
+                                    </select>
 
-                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Total</label>
                                     <input disabled type="number" v-model="this.total" class="form-control">
-                                    <!-- <input v-if="booking_detail.status == 'checkout'" disabled  type="number" v-model="booking_detail.total" class="form-control">
-                                    <input v-else type="number" v-model="booking_detail.total" class="form-control"> -->
                                 </div>
-
-                                <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
-                                    <!-- <label>Room Rate</label>
-                                    <input disabled type="number" v-model="booking_detail.room_rate" class="form-control"> -->
-                                    <!-- <input v-if="booking_detail.status == 'checkout'" disabled  type="number" v-model="booking_detail.room_rate" class="form-control">
-                                    <input v-else type="number" v-model="booking_detail.room_rate" class="form-control"> -->
-                                </div>
+                                <div class="col-md-3 mb-3 mb-lg-3 col-lg-3"></div>
 
                                 <div class="col-md-6 mb-6 mb-lg-6 col-lg-6">
                                     <label>Amount</label>
-                                     <input v-model="booking_payment.amount_recieved" name="payment" type="number" class="form-control" placeholder="Amount">
+                                     <input v-model="booking_payment.amount_recieved" name="payment" type="number" class="form-control" placeholder="Amount" required>
                                 </div>
                             </div>
 
@@ -437,58 +196,27 @@
                             </button>
                         </form>
 
-                        <br>
+                        <hr>
 
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
-                                    <th>Room name</th>
-                                    <th>Room rate</th>
-                                    <th>Check in Date</th>
-                                    <th>Check out Date</th>
-                                    <th>Nights</th>
-                                    <th>Status</th>
-                                    <th>Room NO.</th>
-                                    <th>Total cost</th>
+                                    <th>Name</th>
+                                    <th>Email Address</th>
+                                    <th>Contact #</th>
+                                    <th>Address</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="booking_detail in booking_details" v-bind:key="booking_detail.id">
-                                    <td align="left">{{ booking_detail.category_name}} </td>
-                                    <td align="right">{{ booking_detail.room_rate }} </td>
-                                    <td align="center">{{ booking_detail.check_in | moment("dddd, MMMM Do YYYY") }} </td>
-                                    <td align="center">{{ booking_detail.check_out | moment("dddd, MMMM Do YYYY")}} </td>
-                                    <td align="center">{{ booking_detail.nights }} </td>
-                                    
-                                    <td align="center" v-if="booking_detail.status == 'cancelled'" style="font-weight: 700;" class="text-danger">
-                                        <span class="badge badge-danger">{{ booking_detail.status }}</span>
-                                    </td>
-                                    <td align="center" v-else-if="booking_detail.status == 'checkout'" style="font-weight: 700;" class="text-danger">
-                                        <span class="badge badge-danger">CHECKED OUT</span>
-                                    </td>
-                                    <td align="center" v-else-if="booking_detail.status == 'occupied' && booking_detail.paid_status == 1" style="font-weight: 700;" class="text-primary">
-                                        <span class="badge badge-info">{{ booking_detail.status }}</span>
-                                    </td>
-                                    <td align="center" v-else-if="booking_detail.status == 'occupied' && booking_detail.paid_status == 0" style="font-weight: 700;" class="text-primary">
-                                        <span class="badge badge-warning">Unpaid</span>
-                                    </td>
-                                    <td align="center" v-else-if="booking_detail.status == 'pending'" class="text-warning">
-                                        <span class="badge badge-warning">{{ booking_detail.status }}</span>
-                                    </td>
-                                    <td align="center" v-else style="font-weight: 700;" class="text-success">
-                                        <span class="badge badge-success">{{ booking_detail.status }}</span>
-                                    </td>
-
-                                    <td align="center" v-if="booking_detail.room_no == 0"> N/A </td>
-                                    <td align="center" v-else>{{booking_detail.room_no}} </td>
-
-                                    <td align="right">{{booking_detail.total}} </td>
+                                    <td align="left">{{ booking_detail.first_name}}, {{ booking_detail.last_name}} </td>
+                                    <td align="left">{{ booking_detail.email_address }} </td>
+                                    <td align="left">{{ booking_detail.contact_number }}</td>
+                                    <td align="left">{{ booking_detail.address }} </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    
-                    
 
                     <div class="modal-footer">
                         <button v-if="booking_detail.status == 'checkout' || 
@@ -570,6 +298,7 @@ import listPlugin from '@fullcalendar/list';
 import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
+import { compensateScroll } from '@fullcalendar/core';
 
 export default {
     props: ['room_categories'],
@@ -595,6 +324,7 @@ export default {
                 nights: '',
                 status: '',
                 total: '',
+                grand_total: '',
             },
             cat_name: '',
             roomno: '',
@@ -615,17 +345,21 @@ export default {
                 booking_id: '',
                 payment: '',
                 amount_recieved: '',
+                payment_mode: '',
+                charges: '',
             },
             charges: [],
+            chargeIds: [],
             checkedPrices: [],
             checkedCharges: [],
             id: '',
             name: '',
             total: '',
+            payment_mode: '',
             today_date: new Date().toJSON().slice(0,10).replace(/-/g,'/'),
             paid_status: '',
             edit: false,
-            refer_id: ''
+            refer_id: '',
         };
     },
 
@@ -634,6 +368,59 @@ export default {
     },
 
     methods: {
+        // Compute Charges Selected
+        computeTotalCharges(charge, event, index){
+            axios.get('/api/booking_detail/'+this.refer_id)
+            .then(res => {
+                var data = res.data[0]
+                var total = data[0]['grand_total'];
+                var checkedPricesTotal = 0;
+                // var chargeIds = [];
+
+                if(event.target.checked == true){
+                    this.checkedPrices.push(charge);
+                    for(var i=0; i < this.checkedPrices.length; i++){
+                        checkedPricesTotal += this.checkedPrices[i]['charge_price']
+                        this.chargeIds.push(this.checkedPrices[i]['id']);
+                        // chargeIds.push(this.checkedPrices[i]['id']);
+                    } 
+                }else{
+                    this.checkedPrices.pop();
+                    for(var i=0; i < this.checkedPrices.length; i++){
+                        checkedPricesTotal -= this.checkedPrices[i]['charge_price']
+                        // chargeIds.splice(-1,1)
+                    }
+                    this.chargeIds.pop();
+                }
+                this.total = total + checkedPricesTotal;
+                this.booking_payment.charges = this.chargeIds.toString();
+                
+                console.log(this.booking_payment.charges);
+            })
+        },
+
+        // Fetch Charges
+        getCharges(){
+            axios.get("/api/get_other_charges")
+            .then(res => {
+                this.charges = res.data.data;
+                this.chargeIds = [];
+                for(var i=0; i < this.charges.length; i++){
+                    for(var k=0; k < this.chargesIds.length; k++){
+                        if(this.chargesIds[k] == this.charges[i].id){
+                            this.chargeIds.push(this.charges[i].id);
+                            this.booking_payment.charges = this.chargeIds;
+                        }
+                    }
+                }
+                
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        },
+
+
         deleteBooking(id){
             swal({
                 title: "Are you sure?",
@@ -690,47 +477,6 @@ export default {
             });
         },
 
-        // Compute Charges Selected
-        computeTotalCharges(e){
-            var checkedPricesTotal = 0;
-            for(var i=0; i < this.checkedPrices.length; i++){
-                checkedPricesTotal += this.checkedPrices[i]['charge_price']
-                
-            }
-
-            for(var i=0; i < this.checkedCharges.length; i++){
-                if(this.checkedCharges.length == 0){
-                    console.log("empty");
-                    if(this.checkedCharges[i]['id'] == e.id){
-                        console.log("same")
-                    }else{
-                        this.checkedCharges.push ( 
-                            e.id
-                        )
-                    }checkedCharges
-                }else{
-                    console.log("empty");
-                }
-                console.log("empty");
-            }
-            
-            
-
-            console.log(this.checkedCharges);
-            this.total = this.total + checkedPricesTotal;
-        },
-
-        // Fetch Charges
-        getCharges(){
-            axios.get("/api/get_other_charges")
-            .then(res => {
-                this.charges = res.data.data;
-            })
-            .catch(err => {
-                console.log(err)
-            })
-        },
-
         updatePayment(){
             this.edit = true;
         },
@@ -752,6 +498,8 @@ export default {
                         axios.post('/api/payment', [me.booking_payment, me.checkedCharges])
                         .then(res => {
                             this.booking_payment.payment = ''
+                            this.booking_payment.payment_mode = '';
+                            this.booking_payment.amount_recieved = '';
                             this.calendarEvents = []
                             this.fetchData();
                             swal("Confirmed", "Payment Successful", "success");
@@ -759,18 +507,32 @@ export default {
                         .catch(err => {
                             swal("Oops", "Failed", "error");
                         })
+                        console.log(this.booking_payment.payment);
                         $('#bookingDetail').fadeOut().modal('hide');
-
-                    }else{
+                    }else if(this.edit == true){
                         this.edit = false;
-                        axios.post('/api/update_payment', me.booking_payment)
+                        // axios.post('/api/update_payment', me.booking_payment)
+                        // .then(res => {
+                        //     this.booking_payment.payment = ''
+                        //     swal("Confirmed", "Addtional Payment Successful", "success");
+                        // })
+                        // .catch(err => {
+                        //     swal("Oops", "Something went wrong", "error");
+                        // })
+                        axios.post('/api/update_payment', [me.booking_payment, me.checkedCharges])
                         .then(res => {
                             this.booking_payment.payment = ''
-                            swal("Confirmed", "Addtional Payment Successful", "success");
+                            this.booking_payment.payment_mode = '';
+                            this.booking_payment.amount_recieved = '';
+                            this.calendarEvents = []
+                            this.fetchData();
+                            swal("Confirmed", "Payment Successful", "success");
                         })
                         .catch(err => {
-                            swal("Oops", "Something went wrong", "error");
+                            swal("Oops", "Failed", "error");
                         })
+                        console.log(this.booking_payment.payment);
+                        $('#bookingDetail').fadeOut().modal('hide');
                     }
 
                 }
@@ -806,27 +568,34 @@ export default {
             this.refer_id = e.event._def.extendedProps.eventID
             axios.get('/api/booking_detail/'+this.refer_id)
             .then(res => {
+                this.chargesIds = res.data[1];
+
                 this.getCharges();
 
-                this.booking_details = res.data.data;
+                this.isCheckAll = false;
+                this.booking_details = res.data[0];
                 this.booking_detail.check_in = this.booking_details[0].check_in;
                 this.booking_detail.check_out = this.booking_details[0].check_out;
                 this.booking_detail.room_cat_id = this.booking_details[0].room_cat_id;
                 this.booking_detail.room_no = this.booking_details[0].room_no;
                 this.booking_detail.room_rate = this.booking_details[0].room_rate;
-                this.booking_detail.total = this.booking_details[0].total;
+                this.booking_detail.grand_total = this.booking_details[0].grand_total;
                 this.booking_detail.id = this.booking_details[0].id;
                 this.booking_detail.booking_detail_id = this.refer_id;
                 this.booking_detail.booking_id = this.booking_details[0].booking_id;
-                this.cat_name = this.booking_details[0].category_name;
                 this.booking_detail.paid_status = this.booking_details[0].paid_status;
-                this.paid_status = this.booking_details[0].paid_status;
                 this.booking_detail.status = this.booking_details[0].status;
+                this.cat_name = this.booking_details[0].category_name;
+                this.paid_status = this.booking_details[0].paid_status;
                 this.roomno = this.booking_details[0].room_no;
 
                 this.id = this.booking_details[0].booking_id;
                 this.name = this.booking_details[0].last_name + ', ' + this.booking_details[0].first_name;
                 this.total = this.booking_details[0].grand_total;
+
+                this.booking_payment.payment_mode = this.booking_details[0].payment_mode;
+                this.booking_payment.payment = this.booking_details[0].payment;
+                
             })
             .catch(err => {
                 console.log(err)

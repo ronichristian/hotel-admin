@@ -40,17 +40,18 @@ Vue.component('admin-rooms', require('./components/admin/AdminRooms.vue').defaul
 Vue.component('admin-services', require('./components/admin/AdminServices.vue').default);
 Vue.component('reserve-services', require('./components/admin/AdminReserveBangquets.vue').default);
 Vue.component('admin-room-reports', require('./components/admin/AdminRoomReports.vue').default);
+Vue.component('admin-bangquet-reports', require('./components/admin/AdminBangquetReports.vue').default);
 
 Vue.component('admin-rooms-status', require('./components/admin/AdminRoomsStatus.vue').default);
 
 Vue.component('admin-room-bookings', require('./components/admin/AdminRoomBookings.vue').default);
 Vue.component('reserve-bangquets', require('./components/admin/AdminReserveBangquets.vue').default);
-// Vue.component('displayrooms', require('./components/client/ClientDisplayRooms.vue').default);
-// Vue.component('reservation', require('./components/client/ClientReservation.vue').default);
-// Vue.component('availablerooms', require('./components/client/ClientAvailableRooms.vue').default);
-// Vue.component('reservationdetail', require('./components/client/ClientReservationDetail.vue').default);
-// Vue.component('roomdetail', require('./components/client/ClientRoomDetail.vue').default);
-// Vue.component('reseravtionform', require('./components/client/ClientReservationForm.vue').default);
+Vue.component('displayrooms', require('./components/client/ClientDisplayRooms.vue').default);
+Vue.component('reservation', require('./components/client/ClientReservation.vue').default);
+Vue.component('availablerooms', require('./components/client/ClientAvailableRooms.vue').default);
+Vue.component('reservationdetail', require('./components/client/ClientReservationDetail.vue').default);
+Vue.component('roomdetail', require('./components/client/ClientRoomDetail.vue').default);
+Vue.component('reseravtionform', require('./components/client/ClientReservationForm.vue').default);
 
 
 /**
